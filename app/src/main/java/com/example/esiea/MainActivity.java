@@ -26,30 +26,26 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static final String BASE_URL = "https://opentdb.com/";
+    private static final String BASE_URL = "https://pokeapi.co/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        showList();
+        //showList();
         makeApiCall();
     }
-    private void showList()
+    private void showList(List< RecipePuppy> recipePuppyList)
     {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
     // use a linear layout manager
     layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-    List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
-        {
-    input.add("Test" + i);
-             }
+
         // define an adapter
-    mAdapter = new ListAdapter(input);
+    mAdapter = new ListAdapter(recipePuppyList);
         recyclerView.setAdapter(mAdapter);
 }
 
@@ -75,7 +71,8 @@ public class MainActivity extends AppCompatActivity
                    if (response.isSuccessful() && response.body() != null)
                    {
                        List<RecipePuppy> recipePuppyList = response.body().getResults();
-                       Toast.makeText( getApplicationContext(),"API Success", Toast.LENGTH_SHORT).show();
+                       //Toast.makeText( getApplicationContext(),"API Success", Toast.LENGTH_SHORT).show();
+                       showList(recipePuppyList);
                    }
                    else
                    {

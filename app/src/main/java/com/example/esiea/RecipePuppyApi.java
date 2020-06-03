@@ -6,6 +6,6 @@ import retrofit2.http.Query;
 
 public interface RecipePuppyApi
 {
-    @GET("api.php?amount=10")
+    @GET("api/v2/pokemon")
     Call<RestRecipePuppy> getRecipePuppyResponse();
 }
