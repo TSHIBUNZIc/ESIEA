@@ -24,6 +24,7 @@ les préréquis pour ce projet étaient:
 Les consignes
 - l'appel à API
 - L'affichage d'une liste dans un RecyclerView
+
 -le stockage des données dans le cache
 
 Les fonctionnalités
