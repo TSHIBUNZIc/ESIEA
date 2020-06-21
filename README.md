@@ -1,6 +1,35 @@
-# ESIEA
-this project consist on save a list of object in a cache but different step where made in order to achieve it:
-- We have first create a kist of object manually
-- After that we have fetch all the data of the list with an API address and in this project we are displaying a list of Pokemon 
-represented in my project with the name RecipePuppy 
--We have finally save the list receive from the API address in the cache( you can see the list in the app even without internet)
+Application Mobile
+
+Membre
+-TSHIBUNZI Cippora Sagesse
+
+Presentation 
+Ce projet a été realisé sur Android avec le language Java
+
+Préréquis
+les préréquis pour ce projet étaient:
+-l'installation d'android studio
+-l'utilisation du gitflow
+-la creation du liste qui affiche les données avec une API address
+-le stockage de données dans le cache 
+"https://pokeapi.co/api/v2/pokemo"
+
+Les consignes
+- l'appel à API
+- L'affichage d'une liste dans un RecyclerView
+-le stockage des données dans le cache
+
+Les fonctionnalités
+
+
+
+
+
+
+
+
+
+
+
+
+
