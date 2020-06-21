@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,9 +56,12 @@ private Gson gson;
     }
     private List<RecipePuppy> getDataFromCache()
     {
-
-        String jsonRecipe = sharedPreferences.getString("jsonRecipePuppy", null);
-        return gson.fromJson(jsonRecipe,  List<RecipePuppy>.class);
+        String jsonRecipe = sharedPreferences.getString( Constant.KEY_RECIPEPUPPY_LIST, null);
+        if(jsonRecipe == null)
+        {return null;
+        } else {
+        Type listType = new TypeToken<List<RecipePuppy>>(){}.getType();
+        return gson.fromJson(jsonRecipe, listType);}
 
     }
     private void showList(List< RecipePuppy> recipePuppyList)
@@ -116,7 +121,7 @@ private Gson gson;
            String jsonString = gson.toJson(recipePuppyList);
            sharedPreferences
                    .edit()
-                   .putString("jsonRecipePuppy", jsonString)
+                   .putString(Constant.KEY_RECIPEPUPPY_LIST, jsonString)
                    .apply();
            Toast.makeText(getApplicationContext(), "list saved" , Toast.LENGTH_SHORT).show();
        }
