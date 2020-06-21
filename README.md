@@ -22,8 +22,8 @@ Les consignes
 -le stockage des données dans le cache
 
 Les fonctionnalités
-![alt tag]((https://user-images.githubusercontent.com/65816066/85232408-f9aab200-b3fe-11ea-8a23-4aa02a0ca140.png)
-)
+![alt tag](https://user-images.githubusercontent.com/65816066/85232408-f9aab200-b3fe-11ea-8a23-4aa02a0ca140.png)
+
 
 
 
