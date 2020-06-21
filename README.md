@@ -6,7 +6,8 @@ Membre
 
 Presentation 
 
-Ce projet a été realisé sur Android avec le language Java
+Ce projet a été realisé sur Android avec le language de programmation Java. Cette application permet d'afficher une liste de pokemon qui
+est ensuite stocker dans le cache et on peut y avoir accès avec ou sans internet une fois stockée.
 
 Préréquis
 les préréquis pour ce projet étaient:
