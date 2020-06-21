@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,14 +29,35 @@ public class MainActivity extends AppCompatActivity
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private static final String BASE_URL = "https://pokeapi.co/";
+private SharedPreferences sharedPreferences;
+private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
         //showList();
-        makeApiCall();
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        List< RecipePuppy> recipePuppyList = getDataFromCache();
+        if(recipePuppyList != null)
+        {
+            showList(recipePuppyList);
+        }
+        else
+        {
+            makeApiCall();
+        }
+    }
+    private List<RecipePuppy> getDataFromCache()
+    {
+
+        String jsonRecipe = sharedPreferences.getString("jsonRecipePuppy", null);
+        return gson.fromJson(jsonRecipe,  List<RecipePuppy>.class);
+
     }
     private void showList(List< RecipePuppy> recipePuppyList)
     {
@@ -51,9 +74,9 @@ public class MainActivity extends AppCompatActivity
 
        private void makeApiCall ()
        {
-           Gson gson = new GsonBuilder()
-                   .setLenient()
-                   .create();
+           //Gson gson = new GsonBuilder()
+                   //.setLenient()
+                   //.create();
 
            Retrofit retrofit = new Retrofit.Builder()
                    .baseUrl(BASE_URL)
@@ -72,6 +95,7 @@ public class MainActivity extends AppCompatActivity
                    {
                        List<RecipePuppy> recipePuppyList = response.body().getResults();
                        //Toast.makeText( getApplicationContext(),"API Success", Toast.LENGTH_SHORT).show();
+                       saveList(recipePuppyList);
                        showList(recipePuppyList);
                    }
                    else
@@ -87,6 +111,16 @@ public class MainActivity extends AppCompatActivity
            });
            //call.enqueue (this);
        }
+       private void saveList(List<RecipePuppy> recipePuppyList)
+       {
+           String jsonString = gson.toJson(recipePuppyList);
+           sharedPreferences
+                   .edit()
+                   .putString("jsonRecipePuppy", jsonString)
+                   .apply();
+           Toast.makeText(getApplicationContext(), "list saved" , Toast.LENGTH_SHORT).show();
+       }
+
     private void showError()
     {
         Toast.makeText(getApplicationContext(), "API Error" , Toast.LENGTH_SHORT).show();
